@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Happy Girlfriend Day ❤️</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{
+min-height:100vh;display:flex;justify-content:center;align-items:center;
+background:linear-gradient(-45deg,#ffd6e7,#ffb3c7,#ffe4ef,#ffc6d8);
+background-size:400% 400%;animation:bg 12s ease infinite;overflow:hidden}
+@keyframes bg{0%{background-position:0 50%}50%{background-position:100% 50%}100%{background-position:0 50%}}
+.hearts span{position:fixed;bottom:-50px;color:#fff8;font-size:20px;animation:float linear infinite}
+@keyframes float{to{transform:translateY(-120vh) rotate(360deg);opacity:0}}
+.card{
+width:92%;max-width:380px;background:rgba(255,255,255,.55);
+backdrop-filter:blur(18px);border-radius:28px;padding:24px;
+box-shadow:0 20px 50px rgba(255,0,120,.25);text-align:center}
+img{width:100%;max-width:240px;border-radius:18px}
+h1{margin:16px 0;color:#c2185b;font-size:30px}
+p{color:#6d3152;line-height:1.7}
+.buttons{display:flex;flex-direction:column;gap:12px;margin-top:24px}
+button{border:none;padding:15px;border-radius:999px;font-size:17px;color:#fff}
+#yes{background:#ff2f92}#no{background:#ef5350}
+.hidden{display:none}
+#surprise{animation:fade .8s}
+@keyframes fade{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+.signature{margin-top:20px;font-weight:bold;color:#ff2f92;font-size:22px}
+
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;justify-content:center;align-items:center;z-index:99}
+.modal.show{display:flex}
+.modal-box{background:#fff;padding:24px;border-radius:20px;width:85%;max-width:320px;text-align:center;box-shadow:0 15px 40px rgba(0,0,0,.2)}
+.modal-box h2{color:#c2185b;margin-bottom:10px}
+.modal-box p{margin-bottom:18px}
+.modal-box button{background:#ff2f92;color:#fff;border:none;padding:12px 22px;border-radius:999px;font-size:16px}
+
+</style>
+</head>
+<body>
+<div class="hearts" id="hearts"></div>
+
+<div class="card" id="card">
+<div id="front">
+<h1>Happy Girlfriend Day ❤️</h1>
+<p>Today is all about celebrating the sweetest, cutest and most amazing girl in my life. 💕</p>
+<div class="buttons">
+<button id="yes">Open My Surprise 🎁</button>
+<button id="no">Not Yet 🙈</button>
+</div>
+</div>
+
+<div id="surprise" class="hidden">
+<img src="yes.gif">
+<h1>Happy Girlfriend Day ❤️</h1>
+<p>
+Thank you for making my days a little brighter ever since we started talking.🌸 <br><br>
+
+It's amazing how, in such a short time, you've become someone I genuinely look forward to talking to every day. 😊<br><br>
+
+You somehow know how to make me smile, even on ordinary days. ☀️<br>
+Your company is something I truly enjoy. 🌈<br><br>
+
+I hope you always remember how beautiful, kind, and special you are. You deserve lots of happiness and countless reasons to smile. 💖
+</p>
+<div class="signature">❤️</div>
+</div>
+</div>
+
+
+<div class="modal" id="retryModal">
+ <div class="modal-box">
+   <h2>Let's Try Again 💖</h2>
+   <p>I think you missed the surprise... Let's start over! 🥹</p>
+   <button id="restartBtn">Start Again 🔄</button>
+ </div>
+</div>
+
+<script>
+const msgs=["Really? 🥺","Please? 💖","Pretty Please 🥹","I made this just for you 🌸","One click only 💕","You'll love it 😍","Just one tap ❤️","Come on Princess 👑","Don't leave me waiting 🥹","The surprise is worth it 💝","I promise you'll smile 😊","Almost there 💕","Give me one chance 🌹","Trust me ❤️","You're going to love this ✨","Still saying no? 🥺","My heart is waiting 💖","Last chance... maybe? 🙈","Okay... last last chance 💝","Please open it, my love ❤️"];
+let idx=0,grow=1;
+no.onclick=()=>{
+if(idx<msgs.length){
+   no.textContent=msgs[idx++];
+ }else{
+   document.getElementById("retryModal").classList.add("show");
+ }
+}
+yes.onclick=()=>{
+ document.getElementById("front").classList.add("hidden");
+ document.getElementById("surprise").classList.remove("hidden");
+ for(let i=0;i<60;i++){
+   let e=document.createElement("div");
+   e.textContent=["💖","💕","🌸","✨","🎉"][Math.floor(Math.random()*5)];
+   e.style.position="fixed";
+   e.style.left=Math.random()*100+"vw";
+   e.style.top="-30px";
+   e.style.fontSize="24px";
+   e.style.transition="3s linear";
+   document.body.appendChild(e);
+   setTimeout(()=>{e.style.transform=`translateY(${window.innerHeight+100}px) rotate(720deg)`;e.style.opacity=0;},20);
+   setTimeout(()=>e.remove(),3200);
+ }
+}
+const h=document.getElementById("hearts");
+for(let i=0;i<20;i++){
+ let s=document.createElement("span");
+ s.textContent="❤";
+ s.style.left=Math.random()*100+"vw";
+ s.style.animationDuration=(6+Math.random()*6)+"s";
+ s.style.animationDelay=(Math.random()*6)+"s";
+ h.appendChild(s);
+}
+
+document.getElementById("restartBtn").onclick=()=>{
+  document.getElementById("retryModal").classList.remove("show");
+  idx=0;
+  no.textContent="Not Yet 🙈";
+  document.getElementById("surprise").classList.add("hidden");
+  document.getElementById("front").classList.remove("hidden");
+  // remove confetti if any
+  document.querySelectorAll(".confetti").forEach(e=>e.remove());
+};
+
+</script>
+</body>
+</html>
